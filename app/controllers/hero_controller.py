@@ -6,10 +6,15 @@ def get_hero(hero_id):
 
     response = requests.get(url).json()
 
+    result = response["data"]["results"][0]
+
+    image = f'{result["thumbnail"]["path"]}/portrait_small.{result["thumbnail"]["extension"]}'
+
     data = {
-        'id': response["data"]["results"][0]["id"], 
-        "name": response["data"]["results"][0]["name"], 
-        "description": response["data"]["results"][0]["description"]
+        'id': result["id"], 
+        "name": result["name"], 
+        "description": result["description"],
+        "image": image
     }
 
     return jsonify(data), 200
@@ -25,7 +30,8 @@ def get_all_heros():
         {
             "id": hero["id"],
             "name": hero["name"],
-            "description": hero["description"]
+            "description": hero["description"],
+            "image": f'{hero["thumbnail"]["path"]}/portrait_small.{hero["thumbnail"]["extension"]}'
         } for hero in heros
     ]
 

@@ -3,20 +3,27 @@ from app.models.candidate_model import CandidateModel
 import requests
 
 def add_candidate(candidate_id):
+    session = current_app.db.session
+
     url = f'https://gateway.marvel.com/v1/public/characters/{candidate_id}?apikey=59e51aa09b849f53fc6976dbdd4b1c05&hash=034d42ce78896ef4540fb52918a450c3&ts=1'
 
     response = requests.get(url).json()
 
+    result = response["data"]["results"][0]
+
+    image = f'{result["thumbnail"]["path"]}/portrait_small.{result["thumbnail"]["extension"]}'
+
     data = {
-        'id': response["data"]["results"][0]["id"], 
-        "name": response["data"]["results"][0]["name"], 
-        "description": response["data"]["results"][0]["description"]
+        'id': result["id"], 
+        "name": result["name"], 
+        "description": result["description"],
+        "image": image
     }
 
     hero = CandidateModel(**data)
 
-    current_app.db.session.add(hero)
-    current_app.db.session.commit()
+    session.add(hero)
+    session.commit()
 
     return jsonify(hero), 201
 
@@ -36,16 +43,20 @@ def get_all_candidates():
         {
             "id": hero.id,
             "name": hero.name,
-            "description": hero.description
+            "description": hero.description,
+            "image": hero.image,
+            "team_id": hero.team_id
         } for hero in heros
     ]
 
     return {"candidates": serializer}, 200
 
 def del_candidate(candidate_id):
+    session = current_app.db.session
+
     query = CandidateModel.query.get(candidate_id)
 
-    current_app.db.session.delete(query)
-    current_app.db.session.commit()
+    session.delete(query)
+    session.commit()
 
     return "", 204
