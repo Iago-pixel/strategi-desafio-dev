@@ -11,6 +11,8 @@ Precisamos criar uma ferramenta para o nosso diretor selecionar os novos membros
 * A partir dos possíveis candidatos, montar as equipes diferenciando entre: VINGADORES e EQUIPE.
 
 # Rodar api localmente
+* Você deve ter o Python instalado na máquina
+
 * Entre na pasta do projeto pelo terminal do linux ou pelo CLI mais adequado para seu SO
 
 * Crie um arquivo .env com a url de um banco postgresql
@@ -27,7 +29,7 @@ Precisamos criar uma ferramenta para o nosso diretor selecionar os novos membros
 
 # Rotas
 ## Hero
-### GET all hero STATUS 200
+### GET all heros STATUS 200
 http://localhost:5000/hero
 
 #### Exemplo de retorno
