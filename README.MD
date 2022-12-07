@@ -75,6 +75,16 @@ http://localhost:5000/hero/\<id>
 }
 ```
 
+### GET hero STATUS 404
+http://localhost:5000/hero/\<id>
+
+#### Retorno
+```
+{
+	"error": "Id not found"
+}
+```
+
 ## Candidate
 ### POST candidate STATUS 201
 http://localhost:5000/candidate/\<hero_id><br/>
@@ -89,6 +99,27 @@ Use o id de um hero, o novo candidato terá as informações iguais a do hero
 	"image": "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784/portrait_small.jpg"
 }
 ```
+
+### POST candidate STATUS 404
+http://localhost:5000/candidate/\<hero_id><br/>
+
+#### Retorno
+```
+{
+	"name": "Id not found"
+}
+```
+
+### POST candidate STATUS 409
+http://localhost:5000/candidate/\<hero_id><br/>
+
+#### Retorno
+```
+{
+	"name": "Id already exist"
+}
+```
+
 ### GET candidate STATUS 200
 http://localhost:5000/candidate/\<id>
 
@@ -101,6 +132,12 @@ http://localhost:5000/candidate/\<id>
 	"image": "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784/portrait_small.jpg"
 }
 ```
+
+### GET candidate STATUS 404
+http://localhost:5000/candidate/\<id>
+
+#### Retorno
+Not Found Page
 
 ### GET all candidates STATUS 200
 http://localhost:5000/candidate
@@ -131,8 +168,20 @@ http://localhost:5000/candidate
 http://localhost:5000/candidate/\<id>/exit<br/>
 Remove o candidate de um team
 
+### PATCH candidate - remove team STATUS 404
+http://localhost:5000/candidate/\<id>/exit<br/>
+
+#### Retorno
+Not Found Page
+
 ### DELETE candidate STATUS 204
 http://localhost:5000/candidate/\<id>/exit
+
+### DELETE candidate STATUS 404
+http://localhost:5000/candidate/\<id>/exit
+
+#### Retorno
+Not Found Page
 
 ## Team
 ### POST team STATUS 201
@@ -154,6 +203,40 @@ http://localhost:5000/team
 }
 ```
 
+### POST team STATUS 400
+http://localhost:5000/team
+
+#### Exemplo de envio
+```
+{
+	"name": 0
+}
+```
+
+#### Exemplo de retorno
+```
+{
+	"error": "Name should be `string` and not empty"
+}
+```
+
+### POST team STATUS 400
+http://localhost:5000/team
+
+#### Exemplo de envio
+```
+{
+	"teste": "Alfa"
+}
+```
+
+#### Exemplo de retorno
+```
+{
+	"error": "key `name` not found"
+}
+```
+
 ### GET team STATUS 200
 http://localhost:5000/team/\<id>
 
@@ -165,6 +248,12 @@ http://localhost:5000/team/\<id>
 	"heros": []
 }
 ```
+
+### GET team STATUS 404
+http://localhost:5000/team/\<id>
+
+#### Retorno
+Not Found Page
 
 ### GET all teams 200
 http://localhost:5000/team
@@ -212,9 +301,82 @@ http://localhost:5000/team/\<id>
 }
 ```
 
-### PATCH team - add team STATUS 204
+### PATCH team - rename STATUS 404
+http://localhost:5000/team/\<id>
+
+#### Exemplo de envio
+```
+{
+	"name": "alfa"
+}
+```
+
+#### Retorno
+Not Found Page
+
+### PATCH team - rename STATUS 400
+http://localhost:5000/team/\<id>
+
+#### Exemplo de envio
+```
+{
+	"name": 0
+}
+```
+
+#### Retorno
+```
+{
+	"error": "Name should be `string` and not empty"
+}
+```
+
+### PATCH team - rename STATUS 400
+http://localhost:5000/team/\<id>
+
+#### Exemplo de envio
+```
+{
+	"teste": "Alfa"
+}
+```
+
+#### Retorno
+```
+{
+	"error": "key `name` not found"
+}
+```
+
+### PATCH team - enter in team STATUS 204
 http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
 Coloca um candidate em um team
 
+### PATCH team - enter in team STATUS 404
+http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
+
+#### Retorno
+```
+{
+	"error": "candidate id's is not found"
+}
+```
+
+### PATCH team - enter in team STATUS 404
+http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
+
+#### Retorno
+```
+{
+	"error": "team id's is not found"
+}
+```
+
 ### DELETE team STATUS 204
 http://localhost:5000/team/\<team_id>
+
+### DELETE team STATUS 404
+http://localhost:5000/team/\<team_id>
+
+#### Retorno
+Not Found Page

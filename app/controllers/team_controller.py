@@ -18,10 +18,10 @@ def add_team():
         return jsonify(team), 201
     
     except DataError:
-        return jsonify({"error": "Name should be `string` and not empty."}), 400
+        return jsonify({"error": "Name should be `string` and not empty"}), 400
 
     except KeyError:
-        return jsonify({"error": "key 'name' not found"}), 400
+        return jsonify({"error": "key `name` not found"}), 400
 
 def get_team(team_id):
     team = (
@@ -52,7 +52,7 @@ def rename_team(team_id):
 
         data = request.get_json()
 
-        team = TeamModel.query.get(team_id)
+        team = TeamModel.query.get_or_404(team_id)
 
         setattr(team, "name", data["name"])
 
@@ -62,10 +62,10 @@ def rename_team(team_id):
         return "", 204
     
     except DataError:
-        return jsonify({"error": "Name should be `string` and not empty."}), 400
+        return jsonify({"error": "Name should be `string` and not empty"}), 400
 
     except KeyError:
-        return jsonify({"error": "key 'name' not found"}), 400
+        return jsonify({"error": "key `name` not found"}), 400
 
 def enter_in_team(team_id, candidate_id):
     session = current_app.db.session

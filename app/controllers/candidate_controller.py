@@ -63,7 +63,7 @@ def get_all_candidates():
 def remove_team(candidate_id):
     session = current_app.db.session
 
-    hero = CandidateModel.query.get(candidate_id)
+    hero = CandidateModel.query.get_or_404(candidate_id)
 
     setattr(hero, "team_id", None)
 
