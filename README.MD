@@ -11,15 +11,19 @@ Precisamos criar uma ferramenta para o nosso diretor selecionar os novos membros
 * A partir dos possíveis candidatos, montar as equipes diferenciando entre: VINGADORES e EQUIPE.
 
 # Rodar api localmente
+* Entre na pasta do projeto pelo terminal do linux ou pelo CLI mais adequado para seu SO
+
 * Crie um arquivo .env com a url de um banco postgresql
+
+* Execute "python -m venv venv"
 
 * Entre no ambiente virtual do projeto
 
 * Execute "pip install -r requirements.txt"
 
-* Execute "flask run"
-
 * Execute "flask db upgrade"
+
+* Execute "flask run"
 
 # Rotas
 ## Hero
