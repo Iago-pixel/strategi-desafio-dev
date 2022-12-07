@@ -1,5 +1,7 @@
 from flask import request, current_app, jsonify
 from app.models.candidate_model import CandidateModel
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import UnmappedInstanceError
 import requests
 
 def add_candidate(candidate_id):
@@ -9,27 +11,34 @@ def add_candidate(candidate_id):
 
     response = requests.get(url).json()
 
-    result = response["data"]["results"][0]
+    try:
+        result = response["data"]["results"][0]
 
-    image = f'{result["thumbnail"]["path"]}/portrait_small.{result["thumbnail"]["extension"]}'
+        image = f'{result["thumbnail"]["path"]}/portrait_small.{result["thumbnail"]["extension"]}'
 
-    data = {
-        'id': result["id"], 
-        "name": result["name"], 
-        "description": result["description"],
-        "image": image
-    }
+        data = {
+            'id': result["id"], 
+            "name": result["name"], 
+            "description": result["description"],
+            "image": image
+        }
 
-    hero = CandidateModel(**data)
+        hero = CandidateModel(**data)
 
-    session.add(hero)
-    session.commit()
+        session.add(hero)
+        session.commit()
 
-    return jsonify(hero), 201
+        return jsonify(hero), 201
+    
+    except KeyError:
+        return jsonify({"error": "Id not found"}), 404
+
+    except IntegrityError:
+        return jsonify({"error": "Id already exist"}), 409
 
 def get_candidate(candidate_id):
     hero = (
-        CandidateModel.query.get(candidate_id)
+        CandidateModel.query.get_or_404(candidate_id)
     )
 
     return jsonify(hero), 200
@@ -51,10 +60,22 @@ def get_all_candidates():
 
     return {"candidates": serializer}, 200
 
+def remove_team(candidate_id):
+    session = current_app.db.session
+
+    hero = CandidateModel.query.get(candidate_id)
+
+    setattr(hero, "team_id", None)
+
+    session.add(hero)
+    session.commit()
+
+    return "", 204
+
 def del_candidate(candidate_id):
     session = current_app.db.session
 
-    query = CandidateModel.query.get(candidate_id)
+    query = CandidateModel.query.get_or_404(candidate_id)
 
     session.delete(query)
     session.commit()

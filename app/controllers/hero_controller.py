@@ -6,18 +6,22 @@ def get_hero(hero_id):
 
     response = requests.get(url).json()
 
-    result = response["data"]["results"][0]
+    try:
+        result = response["data"]["results"][0]
 
-    image = f'{result["thumbnail"]["path"]}/portrait_small.{result["thumbnail"]["extension"]}'
+        image = f'{result["thumbnail"]["path"]}/portrait_small.{result["thumbnail"]["extension"]}'
 
-    data = {
-        'id': result["id"], 
-        "name": result["name"], 
-        "description": result["description"],
-        "image": image
-    }
+        data = {
+            'id': result["id"], 
+            "name": result["name"], 
+            "description": result["description"],
+            "image": image
+        }
 
-    return jsonify(data), 200
+        return jsonify(data), 200
+    
+    except KeyError:
+        return jsonify({"error": "Id not found"}), 404
 
 def get_all_heros():
     url = 'https://gateway.marvel.com/v1/public/characters?apikey=59e51aa09b849f53fc6976dbdd4b1c05&hash=034d42ce78896ef4540fb52918a450c3&ts=1'
