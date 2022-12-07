@@ -65,7 +65,7 @@ http://localhost:5000/hero
 ```
 
 ### GET hero STATUS 200
-http://localhost:5000/hero/\<id>
+http://localhost:5000/hero/ID
 
 #### Exemplo de retorno
 ```
@@ -78,7 +78,7 @@ http://localhost:5000/hero/\<id>
 ```
 
 ### GET hero STATUS 404
-http://localhost:5000/hero/\<id>
+http://localhost:5000/hero/ID
 
 #### Retorno
 ```
@@ -89,7 +89,7 @@ http://localhost:5000/hero/\<id>
 
 ## Candidate
 ### POST candidate STATUS 201
-http://localhost:5000/candidate/\<hero_id><br/>
+http://localhost:5000/candidate/HERO_ID<br/>
 Use o id de um hero, o novo candidato terá as informações iguais a do hero
 
 #### Exemplo de retorno
@@ -103,7 +103,7 @@ Use o id de um hero, o novo candidato terá as informações iguais a do hero
 ```
 
 ### POST candidate STATUS 404
-http://localhost:5000/candidate/\<hero_id><br/>
+http://localhost:5000/candidate/HERO_ID<br/>
 
 #### Retorno
 ```
@@ -113,7 +113,7 @@ http://localhost:5000/candidate/\<hero_id><br/>
 ```
 
 ### POST candidate STATUS 409
-http://localhost:5000/candidate/\<hero_id><br/>
+http://localhost:5000/candidate/HERO_ID<br/>
 
 #### Retorno
 ```
@@ -123,7 +123,7 @@ http://localhost:5000/candidate/\<hero_id><br/>
 ```
 
 ### GET candidate STATUS 200
-http://localhost:5000/candidate/\<id>
+http://localhost:5000/candidate/ID
 
 #### Exemplo de retorno
 ```
@@ -136,7 +136,7 @@ http://localhost:5000/candidate/\<id>
 ```
 
 ### GET candidate STATUS 404
-http://localhost:5000/candidate/\<id>
+http://localhost:5000/candidate/ID
 
 #### Retorno
 Not Found Page
@@ -167,20 +167,20 @@ http://localhost:5000/candidate
 ```
 
 ### PATCH candidate - remove team STATUS 204
-http://localhost:5000/candidate/\<id>/exit<br/>
+http://localhost:5000/candidate/ID/exit<br/>
 Remove o candidate de um team
 
 ### PATCH candidate - remove team STATUS 404
-http://localhost:5000/candidate/\<id>/exit<br/>
+http://localhost:5000/candidate/ID/exit<br/>
 
 #### Retorno
 Not Found Page
 
 ### DELETE candidate STATUS 204
-http://localhost:5000/candidate/\<id>/exit
+http://localhost:5000/candidate/ID/exit
 
 ### DELETE candidate STATUS 404
-http://localhost:5000/candidate/\<id>/exit
+http://localhost:5000/candidate/ID/exit
 
 #### Retorno
 Not Found Page
@@ -240,7 +240,7 @@ http://localhost:5000/team
 ```
 
 ### GET team STATUS 200
-http://localhost:5000/team/\<id>
+http://localhost:5000/team/ID
 
 #### Exemplo de retorno
 ```
@@ -252,7 +252,7 @@ http://localhost:5000/team/\<id>
 ```
 
 ### GET team STATUS 404
-http://localhost:5000/team/\<id>
+http://localhost:5000/team/ID
 
 #### Retorno
 Not Found Page
@@ -294,7 +294,7 @@ http://localhost:5000/team
 ```
 
 ### PATCH team - rename STATUS 204
-http://localhost:5000/team/\<id>
+http://localhost:5000/team/ID
 
 #### Exemplo de envio
 ```
@@ -304,7 +304,7 @@ http://localhost:5000/team/\<id>
 ```
 
 ### PATCH team - rename STATUS 404
-http://localhost:5000/team/\<id>
+http://localhost:5000/team/ID
 
 #### Exemplo de envio
 ```
@@ -317,7 +317,7 @@ http://localhost:5000/team/\<id>
 Not Found Page
 
 ### PATCH team - rename STATUS 400
-http://localhost:5000/team/\<id>
+http://localhost:5000/team/ID
 
 #### Exemplo de envio
 ```
@@ -334,7 +334,7 @@ http://localhost:5000/team/\<id>
 ```
 
 ### PATCH team - rename STATUS 400
-http://localhost:5000/team/\<id>
+http://localhost:5000/team/ID
 
 #### Exemplo de envio
 ```
@@ -351,11 +351,11 @@ http://localhost:5000/team/\<id>
 ```
 
 ### PATCH team - enter in team STATUS 204
-http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
+http://localhost:5000/team/TEAM_ID/CANDIDATE_ID<br/>
 Coloca um candidate em um team
 
 ### PATCH team - enter in team STATUS 404
-http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
+http://localhost:5000/team/TEAM_ID/CANDIDATE_ID<br/>
 
 #### Retorno
 ```
@@ -365,7 +365,7 @@ http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
 ```
 
 ### PATCH team - enter in team STATUS 404
-http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
+http://localhost:5000/team/TEAM_ID/CANDIDATE_ID<br/>
 
 #### Retorno
 ```
@@ -375,10 +375,10 @@ http://localhost:5000/team/\<team_id>/\<candidate_id><br/>
 ```
 
 ### DELETE team STATUS 204
-http://localhost:5000/team/\<team_id>
+http://localhost:5000/team/TEAM_ID
 
 ### DELETE team STATUS 404
-http://localhost:5000/team/\<team_id>
+http://localhost:5000/team/TEAM_ID
 
 #### Retorno
 Not Found Page
